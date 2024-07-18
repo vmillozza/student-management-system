@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    <div class="container mt-5">
+        <h1 class="mb-4">Course List</h1>
+        <table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="course : ${courses}">
+            <td th:text="${course.id}">ID</td>
+            <td th:text="${course.name}">Name</td>
+            <td th:text="${course.description}">Description</td>
+            <td class="text-nowrap">
+                <a class="btn btn-primary btn-sm" th:href="@{/courses/edit/{id}(id=${course.id})}">Edit</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/courses/delete/{id}(id=${course.id})}" onclick="return confirm('Are you sure you want to delete this course?');">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+        <a class="btn btn-success" th:href="@{/courses/new}">Create New Course</a>
+    </div>
+</body>
+</html>
